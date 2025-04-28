@@ -17,7 +17,7 @@ const app = express();
 
 // Enable CORS for all origins (you can restrict this for specific origins later if needed)
 app.use(cors({
-  origin: 'https://lets-chat-1-rp50.onrender.com', // Replace with your frontend URL
+  origin: 'https://chatter-verse-6ohq.vercel.app/', // Replace with your frontend URL
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
