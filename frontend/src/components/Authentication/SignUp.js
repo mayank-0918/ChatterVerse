@@ -60,7 +60,6 @@ const Signup = () => {
         },
         config
       );
-      // console.log(data);
       toast({
         title: "Registration Successful",
         status: "success",
@@ -97,7 +96,6 @@ const Signup = () => {
       });
       return;
     }
-    // console.log(pics);
     if (pics.type === "image/jpeg" || pics.type === "image/png") {
       const data = new FormData();
       data.append("file", pics);
@@ -110,11 +108,9 @@ const Signup = () => {
         .then((res) => res.json())
         .then((data) => {
           setPic(data.url.toString());
-          // console.log(data.url.toString());
           setPicLoading(false);
         })
         .catch((err) => {
-          // console.log(err);
           setPicLoading(false);
         });
     } else {
@@ -132,7 +128,7 @@ const Signup = () => {
 
   return (
     <VStack spacing="5px">
-      <FormControl id="first-name" isRequired>
+      <FormControl id="signup-name" isRequired>
         <FormLabel color="white">Name</FormLabel>
         <Input
           placeholder="Enter Your Name"
@@ -140,7 +136,7 @@ const Signup = () => {
           _placeholder={{ color: "white" }} // Make placeholder text white
         />
       </FormControl>
-      <FormControl id="email" isRequired>
+      <FormControl id="signup-email" isRequired>
         <FormLabel color="white">Email Address</FormLabel>
         <Input
           type="email"
@@ -149,7 +145,7 @@ const Signup = () => {
           _placeholder={{ color: "white" }} // Make placeholder text white
         />
       </FormControl>
-      <FormControl id="password" isRequired>
+      <FormControl id="signup-password" isRequired>
         <FormLabel color="white">Password</FormLabel>
         <InputGroup size="md">
           <Input
@@ -165,7 +161,7 @@ const Signup = () => {
           </InputRightElement>
         </InputGroup>
       </FormControl>
-      <FormControl id="confirm-password" isRequired>
+      <FormControl id="signup-confirm-password" isRequired>
         <FormLabel color="white">Confirm Password</FormLabel>
         <InputGroup size="md">
           <Input
@@ -181,7 +177,7 @@ const Signup = () => {
           </InputRightElement>
         </InputGroup>
       </FormControl>
-      <FormControl id="pic">
+      <FormControl id="signup-pic">
         <FormLabel color="white">Upload your Picture</FormLabel>
         <Input
           type="file"
