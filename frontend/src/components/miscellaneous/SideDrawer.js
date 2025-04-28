@@ -11,7 +11,8 @@ import {
   MenuList,
   Input,
   useToast,
-  Spinner, 
+  Spinner,
+  Badge,  // Import Chakra UI Badge component
 } from "@chakra-ui/react";
 import { Tooltip, Text, Menu, Button, MenuButton } from "@chakra-ui/react";
 import { BellIcon } from "@chakra-ui/icons";
@@ -24,7 +25,6 @@ import { useDisclosure } from "@chakra-ui/react";
 import axios from "axios";
 import ChatLoading from "../ChatLoading";
 import { getSender } from "../../config/ChatLogics";
-// import NotificationBadge, { Effect } from "react-notification-badge";
 import logo from "../../main-logo-white-transparent.png";
 import { Image } from "@chakra-ui/react";
 
@@ -32,13 +32,12 @@ const SideDrawer = () => {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
-  // const [searchResult, setSearchResult] = useState([]);
   const [loadingChat, setLoadingChat] = useState();
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast(); // Correctly call useToast at the top level
 
-  const { user,setSelectedChat,chats,setChats,selectedChat,notification,setNotification } = ChatState();
+  const { user, setSelectedChat, chats, setChats, selectedChat, notification, setNotification } = ChatState();
   const logoutHandler = () => {
     localStorage.removeItem("userInfo");
     history.push("/");
@@ -81,8 +80,7 @@ const SideDrawer = () => {
     }
   };
 
-
-  const accessChat =async (userId) => {
+  const accessChat = async (userId) => {
     try {
       setLoadingChat(true);
 
@@ -93,13 +91,12 @@ const SideDrawer = () => {
         },
       };
 
-      const {data} = await axios.post(`/api/chat`,{userId},config);   /////////CHECK IT FOR FUTUTR REFRENCE
-      if(!chats.find((c)=>c._id===data._id))setChats([data,...chats]);
+      const { data } = await axios.post(`/api/chat`, { userId }, config);
+      if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
 
       setSelectedChat(data);
       setLoadingChat(false);
       onClose();
-
     } catch (error) {
       toast({
         title: "Error Occured!",
@@ -108,7 +105,7 @@ const SideDrawer = () => {
         duration: 5000,
         isClosable: true,
         position: "bottom-left",
-      })
+      });
     }
   };
 
@@ -119,7 +116,6 @@ const SideDrawer = () => {
         justifyContent="space-between"
         alignItems="center"
         backgroundColor="rgba(255, 255, 255, 0.5)"
-        // bg="white"
         width="100%"
         padding="5px 10px"
         borderWidth="5px"
@@ -136,18 +132,18 @@ const SideDrawer = () => {
           <Image
             src={logo}
             alt="Logo"
-            height="170px" 
+            height="170px"
             objectFit="contain"
-            transform="translateY(2%)" 
+            transform="translateY(2%)"
           />
         </Box>
         <Box display="flex" alignItems="center" gap={4}>
           <Menu>
             <MenuButton p={1}>
-              <NotificationBadge
-                count={notification.length}
-                effect={Effect.SCALE}
-              />
+              {/* Replacing NotificationBadge with Chakra UI Badge */}
+              <Badge colorScheme="red" variant="solid" borderRadius="full" px={2}>
+                {notification.length}
+              </Badge>
               <BellIcon fontSize="xl" />
             </MenuButton>
             <MenuList pl={2}>
