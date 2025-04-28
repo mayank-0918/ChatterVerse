@@ -24,7 +24,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import axios from "axios";
 import ChatLoading from "../ChatLoading";
 import { getSender } from "../../config/ChatLogics";
-import NotificationBadge, { Effect } from "react-notification-badge";
+// import NotificationBadge, { Effect } from "react-notification-badge";
 import logo from "../../main-logo-white-transparent.png";
 import { Image } from "@chakra-ui/react";
 
